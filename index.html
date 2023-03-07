@@ -1,0 +1,77 @@
+<html>
+    <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+       <link rel="stylesheet" href="index.css">
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1 class="restaurant-title">Jimmy's Diner</h1>
+            <h2 class="tag-line">The best burgers and pizzas in town</h2>
+        </header>
+        <main>
+            <div class="wrapper">
+                <section id="menu">
+                    <!--The items are rendered here-->
+                </section>
+                    
+                <section id="your-order-section" class="hidden">
+                    <h2 class="order-title">Your order</h2>
+                    <section id="orders">
+                        <!--ordered items are rendered here-->
+                    </section>
+                    
+                    <br>
+                    
+                    <section class="total-price-section">
+                        <h2 >Total price:</h2>
+                        <h2 class="total-price" id="total-price"></h2>
+                    </section>
+                    <button class="order-btn" id="complete-order-btn">Complete Order</button>
+                </section>
+                
+                <section id="thank-you-message" class="thank-you-message hidden">
+                      <!--Thank you message rendered here-->
+                </section>
+                
+                <!--End of main section, form section below-->
+                
+                <div id="order-form" class="form-container hidden">
+                    <div class="form-close-btn-container">
+                        <button class="form-close-btn" id="form-close-btn">X</button>
+                    </div>
+                    <div class="form-inner">
+                        <h2>Enter card details<h2>
+                        <form id="payment-info-form">
+                            <label for="name"></label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="user-name"
+                                placeholder="enter your name"
+                                required>
+                            <label for="card-number"></label>
+                            <input 
+                                type="text"
+                                id="card-number"
+                                name="card-number"
+                                placeholder="enter your card number"
+                                required>
+                            <label for="CCV"></label>
+                            <input 
+                                type="text"
+                                id="CCV"
+                                name="CCV"
+                                placeholder="enter your CCV"
+                                required>
+                            <button type="submit" class="pay-btn">Pay</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+	<script src="index.js" type='module'></script>
+    </body>
+</html>
+
