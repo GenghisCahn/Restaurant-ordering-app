@@ -26,15 +26,17 @@ renderMenu()
     
     itemsArray.forEach(function(item){
         
+        const {emoji, name, ingredients, price, id} = item
+        
         itemsHtml += `
                 <div class="object-container">
-                    <span class="emoji">${item.emoji}</span>
+                    <span class="emoji">${emoji}</span>
                     <div class="menu-items">
-                        <h2>${item.name}</h2>
-                        <p>${item.ingredients}</p>
-                        <h2>£${item.price}</h2>
+                        <h2>${name}</h2>
+                        <p>${ingredients}</p>
+                        <h2>£${price}</h2>
                     </div>
-                     <button class="add-btn" data-btn=${item.id}>+</button>
+                     <button class="add-btn" data-btn=${id}>+</button>
                 </div>
                 `  
     })
@@ -95,12 +97,15 @@ function getNewOrder(itemId){
 
 
 function removeFromOrder(orderId){
-    const targetObject = ordersArray.filter(function(order){
-        return order.id === orderId
-    })[0]
-    ordersArray.pop(targetObject)
+    
+    const orderIndex = ordersArray.findIndex((order) => order.id === orderId)
+    ordersArray.splice(orderIndex, 1)
     
     renderOrders()
+    
+    if (ordersArray.length < 1){
+        document.getElementById("your-order-section").classList.add('hidden')
+    } 
 }
 
 
@@ -108,17 +113,20 @@ function removeFromOrder(orderId){
 function renderOrders(){
     let ordersHtml = ''
     let totalPrice = 0
-
+    
     for (let order of ordersArray){
+        
+        const {name, amount, id, price} = order
+        
         ordersHtml += `
         <div class="orders-container">
-            <h2>${order.name}</h2>
-            <h3 class="order-amount">x${order.amount}</h3>
-            <button class="remove-btn" data-remove=${order.id}>REMOVE</button>
-            <h2 class="order-price">£${order.price}</h2>
+            <h2>${name}</h2>
+            <h3 class="order-amount">x${amount}</h3>
+            <button class="remove-btn" data-remove=${id}>REMOVE</button>
+            <h2 class="order-price">£${price}</h2>
         </div> `
         
-        totalPrice += order.price 
+        totalPrice += price 
     }
     
    
@@ -134,12 +142,35 @@ function handleCompleteOrderBtn(){
     if(ordersArray.length > 0){
         document.getElementById("order-form").classList.remove('hidden')
     }
+    
+    const addButtons = document.querySelectorAll('.add-btn')
+    const removeButtons = document.querySelectorAll('.remove-btn')
+     
+     for (const addButton of addButtons){
+         addButton.setAttribute('disabled', '')
+     }
+     
+     for (const removeButton of removeButtons){
+         removeButton.setAttribute('disabled', '')
+     }
 }
 
 
 
 function handleFormCloseBtn(){
     document.getElementById("order-form").classList.add('hidden')
+    
+    const addButtons = document.querySelectorAll('.add-btn')
+    const removeButtons = document.querySelectorAll('.remove-btn')
+     
+     for (const addButton of addButtons){
+         addButton.removeAttribute('disabled', '')
+     }
+     
+     for (const removeButton of removeButtons){
+         removeButton.removeAttribute('disabled', '')
+     }
+    
 }
 
 
